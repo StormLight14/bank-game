@@ -8,8 +8,9 @@
   let playerNameInput = $state("");
   // name, score, banking
   let players: Array<[string, number, boolean]> = $state([]);
-  let currentRound = $state(0);
-  let currentTurn = $state(0);
+  let winner: [string, number, boolean] = $state(["NO ONE", 0, false]);
+  let currentRound = $state(1);
+  let currentRoll = $state(1);
   let currentScore = $state(0);
 
   function onPlay() {
@@ -29,12 +30,63 @@
     }
   }
 
+  function roundEnd() {
+    if (currentRound < rounds) {
+      currentScore = 0;
+      currentRoll = 1;
+      currentRound += 1;
+
+      for (let i=0; i<players.length; i++) {
+        players[i][2] = false;
+      }
+    } else {
+      page = "end";
+      
+      for (let i=0; i<players.length; i++) {
+        if (players[i][1] > winner[1]) {
+          winner = players[i];
+        }
+      }
+    }
+  }
+
   function bank(playerIndex: number) {
-    players[playerIndex][2] = true;
+    if (currentScore > 0) {
+      players[playerIndex][2] = true;
+      players[playerIndex][1] += currentScore;
+
+      let allPlayersBanked = true;
+      for (let i=0; i<players.length; i++) {
+        if (players[i][2] === false) {
+          allPlayersBanked = false;
+        }
+      }
+      if (allPlayersBanked === true) {
+        roundEnd();
+      } 
+    }
+    
   }
 
   function undoBank(playerIndex: number) {
     players[playerIndex][2] = false;
+    players[playerIndex][1] -= currentScore;
+  }
+
+  function rollPressed(button: number) {
+    if (button === 7 && currentRoll <= 3) {
+      currentScore += 70;
+      currentRoll += 1;
+    }
+    else if (button === 0 && currentRoll > 3) {
+      currentScore *= 2;
+      currentRoll += 1;
+    } else if (button === 7) {
+      roundEnd();
+    } else if (button !== 0) {
+      currentRoll += 1;
+      currentScore += button;
+    } 
   }
 </script>
 
@@ -62,6 +114,8 @@
     <button type="button" onclick={onPlay}>Play!</button>
 
   {:else if page === "game"}
+    <p>Round: {currentRound}/{rounds}</p>
+    <p>Current Pot: {currentScore}</p>
     {#each players as playerData, i}
     <div class="player">
       <p>{playerData[0]}</p>
@@ -76,9 +130,11 @@
 
     <div class="roll-menu">
       {#each [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] as num}
-        <button class="roll-item">{num}</button>
+        <button class="roll-item" onclick={() => rollPressed(num)}>{num}</button>
       {/each}
-      <button class="roll-item">Doubles</button>
+      <button class="roll-item" onclick={() => rollPressed(0)}>Doubles</button>
     </div>
+  {:else if page === "end"}
+    <p>{winner[0]} won the game with {winner[1]} points!</p>
   {/if}
 </div>
