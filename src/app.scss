@@ -102,11 +102,16 @@ button:active {
     background-color: #e8e8e8;
 }
 
+.remove-player {
+    padding: 0.1em 0.1em;
+    padding-left: 1em;
+    box-shadow: none;
+}
+
 *:focus {
     outline: none;
 }
 
-/*
 @media (prefers-color-scheme: dark) {
     :root {
         color: #f6f6f6;
@@ -126,5 +131,7 @@ button:active {
     button:active {
         background-color: #0f0f0f69;
     }
+    .remove-player {
+        background-color: #00000000;
+    }
 }
-*/

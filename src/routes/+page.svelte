@@ -116,7 +116,7 @@
       {#each players as playerData}
       <div class="player">
         <p>{playerData[0]}</p>
-        <button type="button" onclick={() => removePlayer(playerData[0])}>
+        <button type="button" class="remove-player" onclick={() => removePlayer(playerData[0])}>
           <Trash2 size="16" strokeWidth="2"/>
         </button>
       </div>
