@@ -7,6 +7,8 @@
   let rounds = $state(10);
   let playerNameInput = $state("");
   let players: String[] = $state([]);
+  let currentRound = $state(0);
+  let currentTurn = $state(0);
 
   function onPlay() {
     if (players.length >= 2) {
