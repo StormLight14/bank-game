@@ -6,7 +6,7 @@
   let page = $state("home");
   let rounds = $state(10);
   let playerName = $state("");
-  let players: String[] = $state(["john"]);
+  let players: String[] = $state([]);
 
   function onPlay() {
     if (players.length >= 2) {
@@ -55,5 +55,5 @@
   </div>
 
 {:else if page === "game"}
-  
+
 {/if}
