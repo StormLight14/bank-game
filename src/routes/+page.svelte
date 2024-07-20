@@ -6,34 +6,31 @@
   let page = $state("home");
   let rounds = $state(10);
   let playerNameInput = $state("");
-  let players: String[] = $state([]);
+  // name, score
+  let players: Array<[string, number]> = $state([]);
   let currentRound = $state(0);
   let currentTurn = $state(0);
 
   function onPlay() {
     if (players.length >= 2) {
-      page = "players";
+      page = "game";
     }
   }
 
-  function removePlayer(playerName: String) {
-    console.log("test");
-    if (players.includes(playerName)) {
-      players = players.filter(item => item != playerName);
-    }
+  function removePlayer(playerName: string) {
+    players = players.filter(item => item[0] != playerName);
   }
 
-  function addPlayer(playerName: String) {
-    console.log("add player")
-    if (playerName.length > 0 && !players.includes(playerName)) {
-      players.push(playerName);
+  function addPlayer(playerName: string) {
+    if (playerName.length > 0 && !players.includes([playerName, 0])) {
+      players.push([playerName, 0]);
       playerNameInput = "";
     }
   }
 </script>
 
-{#if page === "home"}
-  <div class="container">
+<div class="container">
+  {#if page === "home"}
     <h1>BANK</h1>
     <input type="range" bind:value={rounds} min="5" max="30"/>
     <p>{rounds} rounds</p>
@@ -43,10 +40,10 @@
       <button type="submit">Add</button>
     </form>
     <div class="players">
-      {#each players as player}
+      {#each players as playerData}
       <div class="player">
-        <p>{player}</p>
-        <button type="button" onclick={() => removePlayer(player)}>
+        <p>{playerData[0]}</p>
+        <button type="button" onclick={() => removePlayer(playerData[0])}>
           <Trash2 size="16" strokeWidth="2"/>
         </button>
       </div>
@@ -54,8 +51,13 @@
     </div>
   
     <button type="button" onclick={onPlay}>Play!</button>
-  </div>
 
-{:else if page === "game"}
-
-{/if}
+  {:else if page === "game"}
+    {#each players as playerData}
+    <div class="player">
+      <p>{playerData[0]}</p>
+      <p>{playerData[1]}</p>
+    </div>
+    {/each}
+  {/if}
+</div>
