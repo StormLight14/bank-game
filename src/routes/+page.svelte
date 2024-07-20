@@ -5,7 +5,7 @@
 
   let page = $state("home");
   let rounds = $state(10);
-  let playerName = $state("");
+  let playerNameInput = $state("");
   let players: String[] = $state([]);
 
   function onPlay() {
@@ -25,7 +25,7 @@
     console.log("add player")
     if (playerName.length > 0 && !players.includes(playerName)) {
       players.push(playerName);
-      playerName = "";
+      playerNameInput = "";
     }
   }
 </script>
@@ -36,8 +36,8 @@
     <input type="range" bind:value={rounds} min="5" max="30"/>
     <p>{rounds} rounds</p>
 
-    <form class="row" onsubmit={() => addPlayer(playerName)}>
-      <input type="text" placeholder="Player Name..." bind:value={playerName}/>
+    <form class="row" onsubmit={() => addPlayer(playerNameInput)}>
+      <input type="text" placeholder="Player Name..." bind:value={playerNameInput}/>
       <button type="submit">Add</button>
     </form>
     <div class="players">
