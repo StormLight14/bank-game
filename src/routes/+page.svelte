@@ -56,6 +56,11 @@
     currentRoll = 1;
     winner = ["NO ONE", 0, false];
     page = "home";
+
+    for (let i=0; i<players.length; i++) {
+      players[i][1] = 0;
+      players[i][2] = false;
+    }
   }
 
   function bank(playerIndex: number) {
