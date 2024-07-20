@@ -54,7 +54,6 @@
     currentScore = 0;
     currentRound = 1;
     currentRoll = 1;
-    players = [];
     winner = ["NO ONE", 0, false];
     page = "home";
   }
