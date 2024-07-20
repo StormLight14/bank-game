@@ -6,8 +6,8 @@
   let page = $state("home");
   let rounds = $state(10);
   let playerNameInput = $state("");
-  // name, score
-  let players: Array<[string, number]> = $state([]);
+  // name, score, banking
+  let players: Array<[string, number, boolean]> = $state([]);
   let currentRound = $state(0);
   let currentTurn = $state(0);
   let currentScore = $state(0);
@@ -23,10 +23,18 @@
   }
 
   function addPlayer(playerName: string) {
-    if (playerName.length > 0 && !players.includes([playerName, 0])) {
-      players.push([playerName, 0]);
+    if (playerName.length > 0 && !players.includes([playerName, 0, false])) {
+      players.push([playerName, 0, false]);
       playerNameInput = "";
     }
+  }
+
+  function bank(playerIndex: number) {
+    players[playerIndex][2] = true;
+  }
+
+  function undoBank(playerIndex: number) {
+    players[playerIndex][2] = false;
   }
 </script>
 
@@ -54,9 +62,14 @@
     <button type="button" onclick={onPlay}>Play!</button>
 
   {:else if page === "game"}
-    {#each players as playerData}
+    {#each players as playerData, i}
     <div class="player">
       <p>{playerData[0]}</p>
+      {#if playerData[2] === false}
+        <button onclick={() => bank(i)}>Bank!</button>
+      {:else}
+        <button onclick={() => undoBank(i)}>Undo Bank</button>
+      {/if}
       <p>{playerData[1]}</p>
     </div>
     {/each}
