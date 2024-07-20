@@ -50,6 +50,15 @@
     }
   }
 
+  function resetGame() {
+    currentScore = 0;
+    currentRound = 1;
+    currentRoll = 1;
+    players = [];
+    winner = ["NO ONE", 0, false];
+    page = "home";
+  }
+
   function bank(playerIndex: number) {
     if (currentScore > 0) {
       players[playerIndex][2] = true;
@@ -65,7 +74,6 @@
         roundEnd();
       } 
     }
-    
   }
 
   function undoBank(playerIndex: number) {
@@ -136,5 +144,6 @@
     </div>
   {:else if page === "end"}
     <p>{winner[0]} won the game with {winner[1]} points!</p>
+    <button onclick={resetGame}>Play Again!</button>
   {/if}
 </div>
