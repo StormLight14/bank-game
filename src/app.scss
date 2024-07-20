@@ -40,6 +40,19 @@
     width: 60vw;
 }
 
+.roll-menu {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 50vw;
+    gap: 5px;
+
+    button {
+        padding: 0.8em 1.3em; 
+    }
+}
+
 a {
     font-weight: 500;
     color: #646cff;

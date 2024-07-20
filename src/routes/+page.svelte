@@ -10,6 +10,7 @@
   let players: Array<[string, number]> = $state([]);
   let currentRound = $state(0);
   let currentTurn = $state(0);
+  let currentScore = $state(0);
 
   function onPlay() {
     if (players.length >= 2) {
@@ -59,5 +60,12 @@
       <p>{playerData[1]}</p>
     </div>
     {/each}
+
+    <div class="roll-menu">
+      {#each [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] as num}
+        <button class="roll-item">{num}</button>
+      {/each}
+      <button class="roll-item">Doubles</button>
+    </div>
   {/if}
 </div>
