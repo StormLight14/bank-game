@@ -131,11 +131,13 @@
     {#each players as playerData, i}
     <div class="player">
       <p>{playerData[0]}</p>
-      {#if playerData[2] === false}
-        <button class="bank-button" onclick={() => bank(i)}>Bank!</button>
-      {:else}
-        <button class="bank-button" onclick={() => undoBank(i)}>Undo Bank</button>
-      {/if}
+      <div class="bank-container">
+        {#if playerData[2] === false}
+          <button class="bank-button" onclick={() => bank(i)}>Bank!</button>
+        {:else}
+          <button class="bank-button" onclick={() => undoBank(i)}>Undo Bank</button>
+        {/if}
+      </div>
       <p>{playerData[1]}</p>
     </div>
     {/each}
