@@ -31,7 +31,7 @@
 }
 
 .player {
-    margin: 0.2em 0;
+    margin: 0.5em 0;
     padding: 0em 1em;
     gap: 10vw;
     display: flex;
@@ -45,6 +45,10 @@
     button {
         margin: 0;
     }
+}
+
+.bank-button {
+    
 }
 
 .roll-menu {

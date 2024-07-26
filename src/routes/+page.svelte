@@ -132,9 +132,9 @@
     <div class="player">
       <p>{playerData[0]}</p>
       {#if playerData[2] === false}
-        <button onclick={() => bank(i)}>Bank!</button>
+        <button class="bank-button" onclick={() => bank(i)}>Bank!</button>
       {:else}
-        <button onclick={() => undoBank(i)}>Undo Bank</button>
+        <button class="bank-button" onclick={() => undoBank(i)}>Undo Bank</button>
       {/if}
       <p>{playerData[1]}</p>
     </div>
