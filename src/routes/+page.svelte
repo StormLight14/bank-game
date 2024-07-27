@@ -8,7 +8,7 @@
   let playerNameInput = $state("");
   // name, score, banking
   let players: Array<[string, number, boolean]> = $state([]);
-  let winner: [string, number, boolean] = $state(["NO ONE", 0, false]);
+  let winners: Array<[string, number, boolean]> = $state([["NO ONE", 0, false]]);
   let currentRound = $state(1);
   let currentRoll = $state(1);
   let currentScore = $state(0);
@@ -43,8 +43,10 @@
       page = "end";
       
       for (let i=0; i<players.length; i++) {
-        if (players[i][1] > winner[1]) {
-          winner = players[i];
+        if (players[i][1] > winners[0][1]) {
+          winners = [players[i]];
+        } else if (players[i][1] === winners[0][1]) {
+          winners.push(players[i])
         }
       }
     }
@@ -54,7 +56,7 @@
     currentScore = 0;
     currentRound = 1;
     currentRoll = 1;
-    winner = ["NO ONE", 0, false];
+    winners = [["NO ONE", 0, false]];
     page = "home";
 
     for (let i=0; i<players.length; i++) {
@@ -122,7 +124,7 @@
       </div>
       {/each}
     </div>
-  
+
     <button type="button" onclick={onPlay}>Play!</button>
 
   {:else if page === "game"}
@@ -149,7 +151,22 @@
       <button class="roll-item" onclick={() => rollPressed(0)}>Doubles</button>
     </div>
   {:else if page === "end"}
-    <p>{winner[0]} won the game with {winner[1]} points!</p>
+    {#if winners.length === 1}
+      <p>{winners[0][0]} won the game with {winners[0][1]} points!</p>
+    {:else}
+      <p>{"Players "}
+      {#each winners as winner,i}
+        {#if i !== 0 && i !== winners.length - 1}
+          , {winner[0]}
+        {:else if i === winners.length - 1}
+          {", and, " + winner[0]}
+        {:else}
+          {winner[0]}
+        {/if}
+      {/each}
+      tied the game with {winners[0][1]} points!
+      </p>
+    {/if}
     <button onclick={resetGame}>Play Again!</button>
   {/if}
 </div>
