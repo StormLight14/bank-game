@@ -156,10 +156,8 @@
     {:else}
       <p>{"Players "}
       {#each winners as winner,i}
-        {#if i !== 0 && i !== winners.length - 1}
-          , {winner[0]}
-        {:else if i === winners.length - 1}
-          {", and, " + winner[0]}
+        {#if i !== winners.length - 1}
+          {winner[0] + ", "} 
         {:else}
           {winner[0]}
         {/if}
