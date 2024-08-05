@@ -151,9 +151,13 @@
         {:else}
           <button class="roll-item" onclick={() => rollPressed(num)}>{num}</button>
         {/if}
-        
       {/each}
-      <button class="roll-item" onclick={() => rollPressed(0)}>Doubles</button>
+      {#if currentRoll > 3}
+        <button class="roll-item" onclick={() => rollPressed(0)}>Doubles</button>
+      {:else}
+        <button class="roll-item doubles-disabled" onclick={() => rollPressed(0)}>Doubles</button>
+      {/if}
+      
     </div>
   {:else if page === "end"}
     {#if winners.length === 1}
