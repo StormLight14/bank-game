@@ -52,6 +52,7 @@
 }
 
 .pot {
+    margin-top: 0;
     font-size: 2.5em;
     font-weight: 500;
 }
@@ -136,6 +137,8 @@ button:active {
 .doubles-disabled {
     background-color: #f0f0f0;
     color: #a0a0a0;
+    cursor: not-allowed;
+    opacity: 0.8;
 }
 
 .remove-player {
