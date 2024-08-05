@@ -47,6 +47,15 @@
     }
 }
 
+.round {
+    font-size: 1.5em;
+}
+
+.pot {
+    font-size: 2.5em;
+    font-weight: 500;
+}
+
 .bank-container {
     left: 50%;
     transform: translateX(-50%);
@@ -66,11 +75,12 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-    width: 50vw;
+    width: 90vw;
     gap: 0.3em;
 
     button {
-        padding: 0.8em 1.3em; 
+        padding: 1em 1.4em;
+        font-size: 1.1em;
     }
 }
 
@@ -117,6 +127,10 @@ button {
 
 button:active {
     background-color: #e8e8e8;
+}
+
+.bad-seven {
+    background-color: #FF0000;
 }
 
 .remove-player {

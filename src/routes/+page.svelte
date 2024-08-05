@@ -128,8 +128,8 @@
     <button type="button" onclick={onPlay}>Play!</button>
 
   {:else if page === "game"}
-    <p>Round: {currentRound}/{rounds}</p>
-    <p>Current Pot: {currentScore}</p>
+    <p class="round">Round: {currentRound}/{rounds}</p>
+    <p class="pot">{currentScore}</p>
     {#each players as playerData, i}
     <div class="player">
       <p>{playerData[0]}</p>
@@ -146,7 +146,12 @@
 
     <div class="roll-menu">
       {#each [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] as num}
-        <button class="roll-item" onclick={() => rollPressed(num)}>{num}</button>
+        {#if num === 7 && currentRoll > 3}
+          <button class="roll-item bad-seven" onclick={() => rollPressed(num)}>{num}</button>
+        {:else}
+          <button class="roll-item" onclick={() => rollPressed(num)}>{num}</button>
+        {/if}
+        
       {/each}
       <button class="roll-item" onclick={() => rollPressed(0)}>Doubles</button>
     </div>
